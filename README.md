@@ -8,7 +8,7 @@ https://github.com/nicenicegame/pa4-nicenicegame/blob/master/src/flashget/Contro
 
 ### download() Method
 consider this code:
-```
+```java
     public void download(ActionEvent event) {
         // ...
             // if the save field is empty, there will be the confirmation dialog to ask for set path to initial
@@ -38,7 +38,7 @@ consider this code:
 
 - Refactoring
     - extract the method and named `showConfirmationDialog` and call this new method instead.
-```
+```java
     private void showConfirmationDialog(String filename) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -57,7 +57,7 @@ consider this code:
 ``` 
 
 - After refactoring
-```
+```java
     public void download(ActionEvent event) {
         // ...
             // if the save field is empty, there will be the confirmation dialog to ask for set path to initial
@@ -72,7 +72,7 @@ consider this code:
 
 ### download() and cancel() Method
 consider this code:
-```
+```java
     public void download(ActionEvent event) {
         // ...
             } else if (!urlField.getText().isEmpty() && !saveField.getText().isEmpty()) {
@@ -91,7 +91,7 @@ consider this code:
     }
 ```
 and this code:
-```
+```java
     public void cancel(ActionEvent event) {
         // ...
         for (ProgressBar progressBar : progressBars) {
@@ -111,7 +111,7 @@ and this code:
     
 - Refactoring
     - extract the method and named `toggleVisible` and call this new method instead.
-```
+```java
     private void toggleVisible(boolean visibility) {
         for (ProgressBar progressBar : progressBars) {
             progressBar.setVisible(visibility);
@@ -125,7 +125,7 @@ and this code:
 ```
     
 After refactoring
-```
+```java
     public void download(ActionEvent event) {
         // ...
             } else if (!urlField.getText().isEmpty() && !saveField.getText().isEmpty()) {
@@ -135,7 +135,7 @@ After refactoring
         }
     }
 ```
-```
+```java
     public void cancel(ActionEvent event) {
         // ...
         toggleVisible(false);
@@ -148,7 +148,7 @@ https://github.com/nicenicegame/pa4-nicenicegame/blob/master/src/flashget/Downlo
 
 ### getDownloadTasks() Method
 consider this code:
-```
+```java
     public DownloadTask[] getDownloadTasks(URL fileUrl, File out, long fileSize, int numThread) {
         DownloadTask[] downloadTasks = new DownloadTask[numThread];
         long chunk = fileSize / numThread;
@@ -168,14 +168,14 @@ consider this code:
     
 - Refactoring
     - Move the entire expression to a separate method and return the result from it.
-```
+```java
     private long getChunk(long fileSize, int numThread) {
         return fileSize / numThread;
     }
 ```
 
 After refactoring
-```
+```java
     public DownloadTask[] getDownloadTasks(URL fileUrl, File out, long fileSize, int numThread) {
         DownloadTask[] downloadTasks = new DownloadTask[numThread];
         long chunk = getChunk(fileSize, numThread);
